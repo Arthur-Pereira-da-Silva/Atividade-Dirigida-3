@@ -12,25 +12,25 @@ class NQueens:
 
         queue = Queue()
         queue.put(([]))
-        nodes_explored = 0  # Contador de nós explorados
-        iterations = 0  # Contador do número de iterações
+        nodes_explored = 0  
+        iterations = 0  
 
         while not queue.empty():
-            solution = queue.get()
-            if self.conflict(solution):
+            solution = queue.get() #Retira-se o 1º estado(lista de coordendas das rainhas) da fila
+            if self.conflict(solution): #Chama a funçao para verificar conflitos
                 continue
-            row = len(solution)
+            row = len(solution) #Número da linha e numero de rainhas posicionadas
             if row == self.size:
-                # Retorna a solução encontrada e as informações de iteração e nós explorados
-                return (solution, iterations, nodes_explored)
+                
+                return (solution, iterations, nodes_explored) # Retorna a solução encontrada e as informações de iteração e nós explorados
 
-            for col in range(self.size):
-                queen = (row, col)
-                queens = solution.copy()
-                queens.append(queen)
-                queue.put((queens))
-                nodes_explored += 1  # Incrementa o contador de nós explorados
-            iterations += 1  # Incrementa o contador de iterações
+            for col in range(self.size): # Para cada coluna, posiciona 1 rainha
+                queen = (row, col) #Coordenadas
+                queens = solution.copy() #Copia a solução atual
+                queens.append(queen) #Adiciona a rainha na solução parcial
+                queue.put((queens)) #Adiciona no final da fila
+                nodes_explored += 1  # Incrementa o contador de nós explorados (configurações de tabuleiro geradas)
+            iterations += 1  # Incrementa o contador de iterações (Quantas vezes passou-se pelo ciclo de execução)
 
         return None  # Retorna None se nenhuma solução for encontrada
 
